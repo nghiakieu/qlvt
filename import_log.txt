@@ -1,0 +1,62 @@
+﻿=======================================================
+  IMPORT Dß╗« LIß╗åU EXCEL ΓåÆ SQLITE
+=======================================================
+
+[1] Khß╗ƒi tß║ío database schema...
+Database initialized at: C:\QLVT\app\backend\qlvt.db
+
+[2] Import ─É╞ín vß╗ï t├¡nh...
+  Γ£ô Don vi tinh: 18 moi
+
+[3] Import Nh├│m vß║¡t t╞░...
+  Γ£ô Nh├│m vß║¡t t╞░: 46 mß╗¢i
+
+[4] Import Kho...
+  Γ£ô Kho: 31 mß╗¢i
+
+[5] Import Vß╗ï tr├¡ vß║¡t t╞░...
+  Γ£ô Vß╗ï tr├¡: 5 mß╗¢i
+
+[6] Import Vß║¡t t╞░ h├áng h├│a (~3086 mß║╖t h├áng)...
+    ... ─æ├ú import 200 vß║¡t t╞░
+    ... ─æ├ú import 400 vß║¡t t╞░
+    ... ─æ├ú import 600 vß║¡t t╞░
+    ... ─æ├ú import 800 vß║¡t t╞░
+    ... ─æ├ú import 1000 vß║¡t t╞░
+    ... ─æ├ú import 1200 vß║¡t t╞░
+    ... ─æ├ú import 1400 vß║¡t t╞░
+    ... ─æ├ú import 1600 vß║¡t t╞░
+    ... ─æ├ú import 1800 vß║¡t t╞░
+    ... ─æ├ú import 2000 vß║¡t t╞░
+    ... ─æ├ú import 2200 vß║¡t t╞░
+    ... ─æ├ú import 2400 vß║¡t t╞░
+    ... ─æ├ú import 2600 vß║¡t t╞░
+    ... ─æ├ú import 2800 vß║¡t t╞░
+    ... ─æ├ú import 3000 vß║¡t t╞░
+  Γ£ô Vß║¡t t╞░: 3087 mß╗¢i
+
+[7] Import Tß╗ôn kho ─æß║ºu kß╗│ (~3565 d├▓ng)...
+    ... ─æ├ú import 500 d├▓ng tß╗ôn kho
+    ... ─æ├ú import 1000 d├▓ng tß╗ôn kho
+    ... ─æ├ú import 1500 d├▓ng tß╗ôn kho
+    ... ─æ├ú import 2000 d├▓ng tß╗ôn kho
+    ... ─æ├ú import 2500 d├▓ng tß╗ôn kho
+    ... ─æ├ú import 3000 d├▓ng tß╗ôn kho
+    ... ─æ├ú import 3500 d├▓ng tß╗ôn kho
+  Γ£ô Tß╗ôn kho: 3565 d├▓ng mß╗¢i
+
+[8] Khß╗ƒi tß║ío counter phiß║┐u...
+  Γ£ô Counter phiß║┐u khß╗ƒi tß║ío OK
+
+=======================================================
+  Kß║╛T QUß║ó IMPORT
+=======================================================
+  ─É╞ín vß╗ï t├¡nh : 18
+  Nh├│m vß║¡t t╞░ : 46
+  Kho         : 31
+  Vß╗ï tr├¡      : 5
+  Vß║¡t t╞░      : 3087
+  Tß╗ôn kho     : 3565
+=======================================================
+  Γ£à IMPORT HO├ÇN Tß║ñT!
+=======================================================

@@ -1,0 +1,65 @@
+﻿=== Bao_cao_tong_hop_ton_kho.xlsx ===
+  Sheet: Tong_hop_ton_kho (3609 rows x 15 cols)
+    ('Tß╗òng hß╗úp tß╗ôn kho', None, None, None, None, None, None, None, None, None, None, None, None, None, None)
+    ('N─âm 2026', None, None, None, None, None, None, None, None, None, None, None, None, None, None)
+    ('M├ú h├áng', 'T├¬n v├á quy c├ích vß║¡t t╞░', '─É╞ín vß╗ï t├¡nh', '─ÉVT ch├¡nh', '─Éß║ºu kß╗│', 'Nhß║¡p kho', None, None, None, 'Xuß║Ñt kho', None, None, None, 'Cuß╗æi kß╗│', None)
+    (None, None, None, None, 'Tß╗ôn ─æß║ºu kß╗│ - Sß╗æ l╞░ß╗úng', 'Nhß║¡p gia c├┤ng mß╗¢i - Sß╗æ l╞░ß╗úng', 'Nhß║¡p ─æiß╗üu chuyß╗ân tß╗½ c├┤ng tr╞░ß╗¥ng kh├íc - Sß╗æ l╞░ß╗úng', 'Tß╗òng nhß║¡p - Sß╗æ l╞░ß╗úng', 'Tß╗òng nhß║¡p - Khß╗æi l╞░ß╗úng', 'Xuß║Ñt ─æiß╗üu chuyß╗ân - Sß╗æ l╞░ß╗úng', 'Xuß║Ñt b├ín thanh l├╜ - Sß╗æ l╞░ß╗úng', 'Tß╗òng xuß║Ñt - Sß╗æ l╞░ß╗úng', 'Tß╗òng xuß║Ñt - Khß╗æi l╞░ß╗úng', 'Tß╗ôn cuß╗æi kß╗│ - Sß╗æ l╞░ß╗úng', 'Tß╗ôn cuß╗æi kß╗│ - Khß╗æi l╞░ß╗úng')
+    ('M├ú kho: 001 (1)', None, None, None, 0, 3719.81, 0, 3719.81, 960139.58, 3719.81, 0, 3719.81, 960139.58, 0, 0)
+    ('T├¬n kho: Kho gia c├┤ng (319)', None, None, None, 0, 3719.81, 0, 3719.81, 960139.58, 3719.81, 0, 3719.81, 960139.58, 0, 0)
+    ('251052015', 'Th├⌐p hß╗Öp 100x50 t=2.0mm L=1.5m', 'Thanh', 'Kg', 0, 4, 0, 4, 27.36, 4, 0, 4, 27.36, 0, 0)
+    ('251052435', 'Th├⌐p hß╗Öp 100x50 t=2.4mm L=3.5m', 'Thanh', 'Kg', 0, 1, 0, 1, 18.27, 1, 0, 1, 18.27, 0, 0)
+    ('251052425', 'Th├⌐p hß╗Öp 100x50 t=2.4mm L=2.5m', 'Thanh', 'Kg', 0, 1, 0, 1, 13.05, 1, 0, 1, 13.05, 0, 0)
+
+=== Kho.xlsx ===
+  Sheet: Kho (34 rows x 7 cols)
+    ('KHO', None, None, None, None, None, None)
+    ('STT', 'M├ú kho', 'T├¬n kho', '─Éß╗ïa chß╗ë kho', 'Chi nh├ính', 'M├ú kho kß║┐ to├ín', 'Trß║íng th├íi')
+    (1, '001', 'Kho gia c├┤ng', 'X├ú Thanh Tr├¼, H├á Nß╗Öi', 'AQY8BCO9', '001', '─Éang hoß║ít ─æß╗Öng')
+    (2, '002', 'Kho long thß╗¡ nghiß╗çm', '', 'AQY8BCO9', '002', '─Éang hoß║ít ─æß╗Öng')
+    (3, '141', 'Kho Nam Ph├ít Quß║úng Ninh', 'Ph╞░ß╗¥ng H├á An, Quß║úng Ninh', 'AQY8BCO9', '141', '─Éang hoß║ít ─æß╗Öng')
+    (4, '161', 'N├║t Giao Kim Xuy├¬n', 'X├ú Ph├║ Th├íi, Hß║úi Ph├▓ng', 'AQY8BCO9', '161', '─Éang hoß║ít ─æß╗Öng')
+    (5, '161.1', 'Kho th├⌐p', 'X├ú Ph├║ Th├íi, Hß║úi Ph├▓ng', 'AQY8BCO9', '161.1', '─Éang hoß║ít ─æß╗Öng')
+    (6, '162', 'Cß║ºu Hß║úi Th├ánh', 'Ph╞░ß╗¥ng An Hß║úi, Hß║úi Ph├▓ng', 'AQY8BCO9', '162', '─Éang hoß║ít ─æß╗Öng')
+
+=== Nh├│m vß║¡t t╞░ h├áng h├│a.xlsx ===
+  Sheet: Nh├│m vß║¡t t╞░ h├áng h├│a (49 rows x 4 cols)
+    ('NH├ôM Vß║¼T T╞» H├ÇNG H├ôA', None, None, None)
+    ('STT', 'M├ú nh├│m', 'T├¬n nh├│m', 'Trß║íng th├íi')
+    (1, 'BL', 'Bu l├┤ng v├á chß╗æt', '─Éang sß╗¡ dß╗Ñng')
+    (2, 'CCDC', 'C├┤ng cß╗Ñ, dß╗Ñng cß╗Ñ', '─Éang sß╗¡ dß╗Ñng')
+    (3, 'CKGC', 'Cß║Ñu kiß╗çn gia c├┤ng tß╗½ th├⌐p h├¼nh v├á t├┤n', '─Éang sß╗¡ dß╗Ñng')
+    (4, 'CVT', 'Cß╗ìc v├ín th├⌐p', '─Éang sß╗¡ dß╗Ñng')
+    (5, '─ÉG', '─É├á gi├ío', '─Éang sß╗¡ dß╗Ñng')
+    (6, 'GVK', 'Hß╗ç giß║▒ng v├ín khu├┤n', '─Éang sß╗¡ dß╗Ñng')
+
+=== Vß║¡t t╞░ h├áng h├│a.xlsx ===
+  Sheet: Vß║¡t t╞░ h├áng h├│a (3091 rows x 39 cols)
+    ('Vß║¼T T╞» H├ÇNG H├ôA', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None)
+    ('STT', 'M├ú h├áng', 'T├¬n h├áng', 'T├¡nh chß║Ñt', '─É╞ín vß╗ï t├¡nh ch├¡nh', 'Nh├│m vß║¡t t╞░, h├áng h├│a', 'Sß╗æ l╞░ß╗úng tß╗ôn', 'M├┤ tß║ú', 'Diß╗àn giß║úi khi mua', 'Diß╗àn giß║úi khi b├ín', 'Ph╞░╞íng ph├íp xuß║Ñt kho', 'Tß╗ôn kho tß╗æi ─æa', 'Tß╗ôn kho tß╗æi thiß╗âu', 'Nguß╗ôn gß╗æc', 'Kho ngß║ºm ─æß╗ïnh', 'Vß╗ï tr├¡ ngß║ºm ─æß╗ïnh', 'Tr╞░ß╗¥ng mß╗ƒ rß╗Öng 1', 'Tr╞░ß╗¥ng mß╗ƒ rß╗Öng 2', 'Tr╞░ß╗¥ng mß╗ƒ rß╗Öng 3', 'Tr╞░ß╗¥ng mß╗ƒ rß╗Öng 4', 'Tr╞░ß╗¥ng mß╗ƒ rß╗Öng 5', 'Tr╞░ß╗¥ng mß╗ƒ rß╗Öng 6', 'Tr╞░ß╗¥ng mß╗ƒ rß╗Öng 7', 'Tr╞░ß╗¥ng mß╗ƒ rß╗Öng 8', 'Tr╞░ß╗¥ng mß╗ƒ rß╗Öng 9', 'Tr╞░ß╗¥ng mß╗ƒ rß╗Öng 10', 'Trß║íng th├íi', '─É╞ín vß╗ï chuyß╗ân ─æß╗òi', None, None, None, '─Éß╗ïnh mß╗⌐c nguy├¬n vß║¡t liß╗çu', None, None, None, 'H├áng h├│a combo', None, None, None)
+    (None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, '─É╞ín vß╗ï chuyß╗ân ─æß╗òi', 'Tß╗╖ lß╗ç chuyß╗ân ─æß╗òi', 'Ph├⌐p t├¡nh', 'M├┤ tß║ú', 'M├ú nguy├¬n vß║¡t liß╗çu', 'T├¬n nguy├¬n vß║¡t liß╗çu', '─É╞ín vß╗ï t├¡nh', 'Sß╗æ l╞░ß╗úng', 'M├ú h├áng', 'T├¬n h├áng', '─É╞ín vß╗ï t├¡nh', 'Sß╗æ l╞░ß╗úng')
+    (1, '1101101', 'Tß║Ñm v├ín khu├┤n th├ánh T3 KT 1720x1300x50mm', 'C├┤ng cß╗Ñ, dß╗Ñng cß╗Ñ', 'Kg', 'VKP', 1691.2, '', 'Tß║Ñm v├ín khu├┤n th├ánh T3 KT 1720x1300x50mm', 'Tß║Ñm v├ín khu├┤n th├ánh T3 KT 1720x1300x50mm', 'Xuß║Ñt kho linh hoß║ít', 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '─Éang sß╗¡ dß╗Ñng', 'tß║Ñm', 84.56, 'Ph├⌐p nh├ón', '1 tß║Ñm = 84.56 Kg', None, None, None, None, None, None, None, None)
+    (2, '1101102', 'Tß║Ñm v├ín khu├┤n th├ánh KT 800x1300x50mm', 'C├┤ng cß╗Ñ, dß╗Ñng cß╗Ñ', 'Kg', 'VKP', 166.4, '', 'Tß║Ñm v├ín khu├┤n th├ánh KT 800x1300x50mm', 'Tß║Ñm v├ín khu├┤n th├ánh KT 800x1300x50mm', 'Xuß║Ñt kho linh hoß║ít', 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '─Éang sß╗¡ dß╗Ñng', 'tß║Ñm', 41.6, 'Ph├⌐p nh├ón', '1 tß║Ñm = 41.60 Kg', None, None, None, None, None, None, None, None)
+    (3, '1101103', 'Tß║Ñm v├ín khu├┤n th├ánh KT 1350x1300x50mm', 'C├┤ng cß╗Ñ, dß╗Ñng cß╗Ñ', 'Kg', 'VKP', 842.4, '', 'Tß║Ñm v├ín khu├┤n th├ánh KT 1350x1300x50mm', 'Tß║Ñm v├ín khu├┤n th├ánh KT 1350x1300x50mm', 'Xuß║Ñt kho linh hoß║ít', 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '─Éang sß╗¡ dß╗Ñng', 'tß║Ñm', 70.2, 'Ph├⌐p nh├ón', '1 tß║Ñm = 70.20 Kg', None, None, None, None, None, None, None, None)
+    (4, '1110101', 'VKP 2x1x0.074m', 'H├áng h├│a', 'Kg', 'VKP', 607891.27, 'Link t├ái liß╗çu D:\\Du an\\01.Du an dang thi cong\\Goi 31 Vung Tau\\BVTC', '', '', 'Xuß║Ñt kho linh hoß║ít', 0, 0, '', '', '', 'Link t├ái liß╗çu D:\\Du an\\01.Du an dang thi cong\\Goi 31 Vung Tau\\BVTC', '', '', '', '', '', '', '', '', '', '─Éang sß╗¡ dß╗Ñng', 'tß║Ñm', 119.09, 'Ph├⌐p nh├ón', '1 tß║Ñm = 119,09 Kg', None, None, None, None, None, None, None, None)
+    (5, '1110102', 'VKP 2x0.5x0.074m', 'H├áng h├│a', 'Kg', 'VKP', 55775.86, '', '', '', 'Xuß║Ñt kho linh hoß║ít', 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '─Éang sß╗¡ dß╗Ñng', 'tß║Ñm', 62.74, 'Ph├⌐p nh├ón', '1 tß║Ñm = 62.74 Kg', None, None, None, None, None, None, None, None)
+
+=== Vß╗ï tr├¡ vß║¡t t╞░, h├áng h├│a.xlsx ===
+  Sheet: Vß╗ï tr├¡ vß║¡t t╞░, h├áng h├│a (8 rows x 5 cols)
+    ('Vß╗è TR├ì Vß║¼T T╞», H├ÇNG H├ôA', None, None, None, None)
+    ('STT', 'M├ú vß╗ï tr├¡', 'T├¬n vß╗ï tr├¡', 'M├┤ tß║ú', 'Trß║íng th├íi')
+    (1, 'LTDG-01', 'B├úi ─æ├║c dß║ºm', '', '─Éang sß╗¡ dß╗Ñng')
+    (2, 'LTDG-02', 'Trß╗Ñ T11 ─æß║┐n T18', '', '─Éang sß╗¡ dß╗Ñng')
+    (3, 'LTDG-03', 'Trß╗Ñ T19 ─æß║┐n T72', '', '─Éang sß╗¡ dß╗Ñng')
+    (4, 'LTDG-04', 'Trß╗Ñ T73-T109', '', '─Éang sß╗¡ dß╗Ñng')
+
+=== ─É╞ín vß╗ï t├¡nh.xlsx ===
+  Sheet: ─É╞ín vß╗ï t├¡nh (19 rows x 4 cols)
+    ('─É╞áN Vß╗è T├ìNH', None, None, None)
+    ('STT', '─É╞ín vß╗ï t├¡nh', 'M├┤ tß║ú', 'Trß║íng th├íi')
+    (1, 'Bao', '', '─Éang sß╗¡ dß╗Ñng')
+    (2, 'B├¼nh', '', '─Éang sß╗¡ dß╗Ñng')
+    (3, 'Bß╗Ö', '', '─Éang sß╗¡ dß╗Ñng')
+    (4, 'C├íi', '', '─Éang sß╗¡ dß╗Ñng')
+    (5, 'Chai', '', '─Éang sß╗¡ dß╗Ñng')
+    (6, 'Chiß║┐c', '', '─Éang sß╗¡ dß╗Ñng')
+
