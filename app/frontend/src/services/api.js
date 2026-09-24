@@ -99,7 +99,7 @@ export const xuatKhoApi = {
 }
 
 // ─── ĐIỀU CHUYỂN ───
-export const dieuChuyenApi = {
+  export const dieuChuyenApi = {
   getList: (params) => api.get('/dieu-chuyen/', { params }),
   getDetail: (id) => api.get(`/dieu-chuyen/${id}`),
   create: (data) => api.post('/dieu-chuyen/', data),
@@ -109,6 +109,10 @@ export const dieuChuyenApi = {
   tinhHinh: (id) => api.get(`/dieu-chuyen/${id}/tinh-hinh`),
   hoanThanh: (id) => api.post(`/dieu-chuyen/${id}/hoan-thanh`),
   exportExcel: (id) => api.get(`/dieu-chuyen/${id}/export-excel`, { responseType: 'blob' }),
+  exportMauLdc: (id) => api.get(`/dieu-chuyen/${id}/export-mau-ldc`, { responseType: 'blob' }),
+  importExcel: (formData) => api.post('/dieu-chuyen/import-excel', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  }),
   xacNhanNhan: (id, data) => api.post(`/dieu-chuyen/${id}/xac-nhan-nhan`, data), // Legacy
 }
 

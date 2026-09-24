@@ -73,14 +73,29 @@ def create(phieu: schemas.PhieuDieuChuyenCreate, db: Session = Depends(get_db)):
         nguoi_giao=phieu.nguoi_giao,
         nguoi_nhan=phieu.nguoi_nhan,
         ghi_chu=phieu.ghi_chu,
+        ly_do_dieu_chuyen=phieu.ly_do_dieu_chuyen,
+        don_vi_van_chuyen=phieu.don_vi_van_chuyen,
+        thoi_gian_hoan_thanh=phieu.thoi_gian_hoan_thanh,
         trang_thai="cho_xuat"
     )
     db.add(db_phieu)
     db.flush()
 
     for ct in phieu.chi_tiet:
+        if getattr(ct, 'is_group', False):
+            db_ct = CtDieuChuyen(
+                phieu_id=db_phieu.id,
+                is_group=True,
+                ten_nhom=ct.ten_nhom,
+                vat_tu_id=None,
+                so_luong_gui=None,
+                so_luong_gui_kg=None
+            )
+            db.add(db_ct)
+            continue
+            
         so_luong_kg = ct.so_luong_gui_kg or 0.0
-        if so_luong_kg == 0 and ct.so_luong_gui > 0:
+        if so_luong_kg == 0 and ct.so_luong_gui and ct.so_luong_gui > 0:
             vt = db.query(VatTu).filter(VatTu.id == ct.vat_tu_id).first()
             if vt and vt.ty_le_quy_doi:
                 so_luong_kg = ct.so_luong_gui / vt.ty_le_quy_doi if vt.phep_tinh == 'chia' else ct.so_luong_gui * vt.ty_le_quy_doi
@@ -114,11 +129,26 @@ def update(phieu_id: int, phieu: schemas.PhieuDieuChuyenCreate, db: Session = De
     db_phieu.nguoi_giao = phieu.nguoi_giao
     db_phieu.nguoi_nhan = phieu.nguoi_nhan
     db_phieu.ghi_chu = phieu.ghi_chu
+    db_phieu.ly_do_dieu_chuyen = phieu.ly_do_dieu_chuyen
+    db_phieu.don_vi_van_chuyen = phieu.don_vi_van_chuyen
+    db_phieu.thoi_gian_hoan_thanh = phieu.thoi_gian_hoan_thanh
 
     db.query(CtDieuChuyen).filter(CtDieuChuyen.phieu_id == phieu_id).delete()
     for ct in phieu.chi_tiet:
+        if getattr(ct, 'is_group', False):
+            db_ct = CtDieuChuyen(
+                phieu_id=db_phieu.id,
+                is_group=True,
+                ten_nhom=ct.ten_nhom,
+                vat_tu_id=None,
+                so_luong_gui=None,
+                so_luong_gui_kg=None
+            )
+            db.add(db_ct)
+            continue
+            
         so_luong_kg = ct.so_luong_gui_kg or 0.0
-        if so_luong_kg == 0 and ct.so_luong_gui > 0:
+        if so_luong_kg == 0 and ct.so_luong_gui and ct.so_luong_gui > 0:
             vt = db.query(VatTu).filter(VatTu.id == ct.vat_tu_id).first()
             if vt and vt.ty_le_quy_doi:
                 so_luong_kg = ct.so_luong_gui / vt.ty_le_quy_doi if vt.phep_tinh == 'chia' else ct.so_luong_gui * vt.ty_le_quy_doi
@@ -374,3 +404,25 @@ def xac_nhan_nhan(phieu_id: int, req: XacNhanNhanRequest, db: Session = Depends(
     phieu.trang_thai = "chenh_lech" if co_chenh_lech else "da_nhan"
     db.commit()
     return {"status": "success", "message": "Xác nhận nhận hàng thành công"}
+
+from fastapi import UploadFile, File
+from utils.excel_dieu_chuyen import parse_import_ldc, export_mau_ldc
+
+@router.post('/import-excel')
+def import_excel(file: UploadFile = File(...), db: Session = Depends(get_db)):
+    return parse_import_ldc(file, db)
+
+@router.get('/{phieu_id}/export-mau-ldc')
+def export_excel_mau_ldc(phieu_id: int, db: Session = Depends(get_db)):
+    phieu = db.query(PhieuDieuChuyen).options(
+        joinedload(PhieuDieuChuyen.chi_tiet).joinedload(CtDieuChuyen.vat_tu).joinedload(VatTu.dvt)
+    ).filter(PhieuDieuChuyen.id == phieu_id).first()
+    if not phieu:
+        raise HTTPException(status_code=404, detail='Khong tim thay lenh')
+    
+    excel_file = export_mau_ldc(phieu, db)
+    return StreamingResponse(
+        excel_file,
+        media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        headers={'Content-Disposition': f'attachment; filename=Lenh_Dieu_Chuyen_{phieu.so_phieu}.xlsx'}
+    )

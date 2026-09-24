@@ -161,6 +161,9 @@ class PhieuDieuChuyen(Base):
     nguoi_giao = Column(String(100))
     nguoi_nhan = Column(String(100))
     ghi_chu = Column(String(500))
+    ly_do_dieu_chuyen = Column(String(300))
+    don_vi_van_chuyen = Column(String(200))
+    thoi_gian_hoan_thanh = Column(String(100))
     trang_thai = Column(String(30), default="cho_xuat")
     # cho_xuat / dang_xuat / hoan_thanh / huy
     # Legacy values: dang_van_chuyen / da_nhan / chenh_lech
@@ -177,11 +180,14 @@ class CtDieuChuyen(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     phieu_id = Column(Integer, ForeignKey("phieu_dieu_chuyen.id", ondelete="CASCADE"))
-    vat_tu_id = Column(Integer, ForeignKey("vat_tu.id"))
+    vat_tu_id = Column(Integer, ForeignKey("vat_tu.id"), nullable=True)
     vi_tri_nhan_id = Column(Integer, ForeignKey("vi_tri.id"), nullable=True)
 
-    so_luong_gui = Column(Float, nullable=False)      # SL theo lệnh
-    so_luong_gui_kg = Column(Float)
+    is_group = Column(Boolean, default=False)
+    ten_nhom = Column(String(200), nullable=True)
+
+    so_luong_gui = Column(Float, nullable=True)      # SL theo lệnh (nullable cho group)
+    so_luong_gui_kg = Column(Float, nullable=True)
     da_xuat_sl = Column(Float, default=0)             # Tổng đã xuất qua các phiếu xuất
     da_xuat_kg = Column(Float, default=0)
     so_luong_nhan = Column(Float, nullable=True)      # Tổng đã nhận (legacy + tổng hợp)

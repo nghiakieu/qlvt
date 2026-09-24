@@ -140,9 +140,11 @@ class PhieuXuat(PhieuXuatBase):
 
 # --- CT Điều Chuyển ---
 class CtDieuChuyenBase(BaseModel):
-    vat_tu_id: int
+    vat_tu_id: Optional[int] = None
     vi_tri_nhan_id: Optional[int] = None
-    so_luong_gui: float
+    is_group: Optional[bool] = False
+    ten_nhom: Optional[str] = None
+    so_luong_gui: Optional[float] = None
     so_luong_gui_kg: Optional[float] = 0.0
     so_luong_nhan: Optional[float] = None
     so_luong_nhan_kg: Optional[float] = None
@@ -151,8 +153,10 @@ class CtDieuChuyenBase(BaseModel):
     ly_do_chenh_lech: Optional[str] = None
 
 class CtDieuChuyenCreate(BaseModel):
-    vat_tu_id: int
-    so_luong_gui: float
+    vat_tu_id: Optional[int] = None
+    is_group: Optional[bool] = False
+    ten_nhom: Optional[str] = None
+    so_luong_gui: Optional[float] = None
     so_luong_gui_kg: Optional[float] = 0.0
     ghi_chu: Optional[str] = None
 
@@ -174,6 +178,9 @@ class PhieuDieuChuyenBase(BaseModel):
     nguoi_giao: Optional[str] = None
     nguoi_nhan: Optional[str] = None
     ghi_chu: Optional[str] = None
+    ly_do_dieu_chuyen: Optional[str] = None
+    don_vi_van_chuyen: Optional[str] = None
+    thoi_gian_hoan_thanh: Optional[str] = None
 
 class PhieuDieuChuyenCreate(PhieuDieuChuyenBase):
     chi_tiet: List[CtDieuChuyenCreate]

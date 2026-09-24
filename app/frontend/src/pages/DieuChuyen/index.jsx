@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import {
   Table, Button, Modal, Form, Input, Select, DatePicker,
-  Space, message, Tag, Card, Row, Col, Typography, InputNumber, Divider, Tooltip, Badge
+  Space, message, Tag, Card, Row, Col, Typography, InputNumber, Divider, Tooltip, Badge, Upload
 } from 'antd'
 import { PlusOutlined, DeleteOutlined, CheckCircleOutlined, EyeOutlined, EditOutlined, UploadOutlined, FileExcelOutlined } from '@ant-design/icons'
 import dayjs from 'dayjs'
@@ -57,8 +57,51 @@ export default function LenhDieuChuyen() {
     setChiTiet(newCt)
   }
 
-  const addRow = () => setChiTiet(prev => [...prev, { key: prev.length, vat_tu_id: null, so_luong_gui: 0, so_luong_gui_kg: 0 }])
+  const addRow = () => setChiTiet(prev => [...prev, { key: prev.length, is_group: false, vat_tu_id: null, so_luong_gui: 0, so_luong_gui_kg: 0 }])
+  const addGroup = () => setChiTiet(prev => [...prev, { key: prev.length, is_group: true, ten_nhom: '' }])
   const removeRow = (idx) => setChiTiet(prev => prev.filter((_, i) => i !== idx))
+
+  const handleImportExcel = async (options) => {
+    const { file, onSuccess, onError } = options
+    const formData = new FormData()
+    formData.append('file', file)
+    
+    try {
+      message.loading({ content: 'Đang đọc file...', key: 'importLdc' })
+      const res = await dieuChuyenApi.importExcel(formData)
+      
+      const { ly_do_dieu_chuyen, don_vi_van_chuyen, thoi_gian_hoan_thanh, chi_tiet } = res.data
+      
+      form.setFieldsValue({
+        ly_do_dieu_chuyen,
+        don_vi_van_chuyen,
+        thoi_gian_hoan_thanh
+      })
+      
+      if (chi_tiet && chi_tiet.length > 0) {
+        const newChiTiet = chi_tiet.map((ct, idx) => {
+          if (ct.is_group) {
+            return { key: chiTiet.length + idx, is_group: true, ten_nhom: ct.ten_nhom }
+          }
+          return {
+            key: chiTiet.length + idx,
+            is_group: false,
+            vat_tu_id: ct.vat_tu_id,
+            _vat_tu: { id: ct.vat_tu_id, ma_vat_tu: ct.ma_vat_tu, ten_hang: ct.ten_vat_tu, dvt_phu: ct.dvt },
+            so_luong_gui: ct.so_luong_gui,
+            so_luong_gui_kg: 0
+          }
+        })
+        setChiTiet(newChiTiet)
+      }
+      
+      message.success({ content: 'Nhập dữ liệu thành công!', key: 'importLdc' })
+      onSuccess("Ok")
+    } catch (err) {
+      message.error({ content: 'Lỗi khi nhập file', key: 'importLdc' })
+      onError(err)
+    }
+  }
 
   const handleSubmit = async () => {
     try {
@@ -69,12 +112,18 @@ export default function LenhDieuChuyen() {
       const data = {
         ...values,
         ngay_dc: values.ngay_dc.format('YYYY-MM-DD'),
-        chi_tiet: chiTiet.filter(c => c.vat_tu_id).map(c => ({
-          vat_tu_id: c.vat_tu_id,
-          so_luong_gui: c.so_luong_gui,
-          so_luong_gui_kg: Math.round(c.so_luong_gui_kg * 100) / 100,
-          ghi_chu: c.ghi_chu,
-        })),
+        chi_tiet: chiTiet.filter(c => c.is_group || c.vat_tu_id).map(c => {
+          if (c.is_group) {
+            return { is_group: true, ten_nhom: c.ten_nhom, so_luong_gui: 0, so_luong_gui_kg: 0 }
+          }
+          return {
+            is_group: false,
+            vat_tu_id: c.vat_tu_id,
+            so_luong_gui: c.so_luong_gui,
+            so_luong_gui_kg: Math.round(c.so_luong_gui_kg * 100) / 100,
+            ghi_chu: c.ghi_chu,
+          }
+        }),
       }
       
       if (editingId) {
@@ -101,14 +150,20 @@ export default function LenhDieuChuyen() {
         ...data,
         ngay_dc: dayjs(data.ngay_dc),
       })
-      const chiTietFormat = data.chi_tiet.map((ct, i) => ({
-        key: i,
-        vat_tu_id: ct.vat_tu_id,
-        so_luong_gui: ct.so_luong_gui,
-        so_luong_gui_kg: ct.so_luong_gui_kg,
-        ghi_chu: ct.ghi_chu,
-      }))
-      setChiTiet(chiTietFormat.length ? chiTietFormat : [{ key: 0, vat_tu_id: null, so_luong_gui: 0, so_luong_gui_kg: 0 }])
+      const chiTietFormat = data.chi_tiet.map((ct, i) => {
+        if (ct.is_group) {
+          return { key: i, is_group: true, ten_nhom: ct.ten_nhom }
+        }
+        return {
+          key: i,
+          is_group: false,
+          vat_tu_id: ct.vat_tu_id,
+          so_luong_gui: ct.so_luong_gui,
+          so_luong_gui_kg: ct.so_luong_gui_kg,
+          ghi_chu: ct.ghi_chu,
+        }
+      })
+      setChiTiet(chiTietFormat.length ? chiTietFormat : [{ key: 0, is_group: false, vat_tu_id: null, so_luong_gui: 0, so_luong_gui_kg: 0 }])
       setModalOpen(true)
     } catch { message.error('Lỗi tải lệnh') }
   }
@@ -144,7 +199,7 @@ export default function LenhDieuChuyen() {
 
   const handleExportExcel = async (id) => {
     try {
-      const res = await dieuChuyenApi.exportExcel(id)
+      const res = await dieuChuyenApi.exportMauLdc(id)
       const url = window.URL.createObjectURL(new Blob([res.data]))
       const link = document.createElement('a')
       link.href = url
@@ -170,7 +225,7 @@ export default function LenhDieuChuyen() {
         nguoi_nhan: lenh.nguoi_nhan,
       })
       
-      const ct = lenh.chi_tiet.map((item, idx) => {
+      const ct = lenh.chi_tiet.filter(c => !c.is_group).map((item, idx) => {
         const con_lai = Math.max(0, item.so_luong_gui - (item.da_xuat_sl || 0))
         const con_lai_kg = Math.max(0, item.so_luong_gui_kg - (item.da_xuat_kg || 0))
         return {
@@ -245,7 +300,7 @@ export default function LenhDieuChuyen() {
       title: 'Thao tác', width: 270, fixed: 'right',
       render: (_, r) => (
         <Space>
-          <Tooltip title="In biên bản (Excel)">
+          <Tooltip title="In Lệnh Điều Chuyển">
             <Button size="small" type="default" icon={<FileExcelOutlined style={{color: 'green'}}/>} onClick={() => handleExportExcel(r.id)} />
           </Tooltip>
           <Tooltip title="Kiểm tra tình hình">
@@ -309,29 +364,54 @@ export default function LenhDieuChuyen() {
             <Col span={6}><Form.Item name="nguoi_nhan" label="Người nhận"><Input /></Form.Item></Col>
             <Col span={6}><Form.Item name="bien_so_xe" label="Biển số xe"><Input /></Form.Item></Col>
           </Row>
+          <Row gutter={12}>
+            <Col span={8}><Form.Item name="ly_do_dieu_chuyen" label="Lý do điều chuyển"><Input /></Form.Item></Col>
+            <Col span={8}><Form.Item name="don_vi_van_chuyen" label="Đơn vị vận chuyển"><Input /></Form.Item></Col>
+            <Col span={8}><Form.Item name="thoi_gian_hoan_thanh" label="Thời gian hoàn thành"><Input /></Form.Item></Col>
+          </Row>
 
           <Divider orientation="left" plain style={{ margin: '8px 0' }}>Danh sách vật tư điều chuyển</Divider>
 
-          {chiTiet.map((ct, idx) => (
-            <Row key={ct.key} gutter={8} align="middle" style={{ marginBottom: 6 }}>
-              <Col span={9}>
-                <MaterialSelect placeholder="Chọn vật tư" style={{ width: '100%' }} value={ct.vat_tu_id} onChange={(v, vt) => handleVatTuChange(idx, v, vt)} />
-              </Col>
-              <Col span={4}>
-                <InputNumber placeholder="SL" style={{ width: '100%' }} min={0} value={ct.so_luong_gui} onChange={v => handleSlChange(idx, v)} addonAfter={ct._vat_tu?.dvt_phu || 'SL'} />
-              </Col>
-              <Col span={4}>
-                <InputNumber placeholder="Kg" style={{ width: '100%' }} min={0} value={ct.so_luong_gui_kg} onChange={v => { const nc = [...chiTiet]; nc[idx].so_luong_gui_kg = v; setChiTiet(nc) }} addonAfter="Kg" />
-              </Col>
-              <Col span={5}>
-                <Input placeholder="Ghi chú" value={ct.ghi_chu} onChange={e => { const nc = [...chiTiet]; nc[idx].ghi_chu = e.target.value; setChiTiet(nc) }} />
-              </Col>
-              <Col span={2}>
-                <Button danger icon={<DeleteOutlined />} onClick={() => removeRow(idx)} />
-              </Col>
-            </Row>
-          ))}
-          <Button type="dashed" icon={<PlusOutlined />} onClick={addRow} style={{ marginTop: 8 }}>Thêm dòng</Button>
+          {chiTiet.map((ct, idx) => {
+            if (ct.is_group) {
+              return (
+                <Row key={ct.key} gutter={8} align="middle" style={{ marginBottom: 6, backgroundColor: '#f0f2f5', padding: '6px 0', borderRadius: 4 }}>
+                  <Col span={22}>
+                    <Input placeholder="Tên nhóm (VD: I KHUNG XE ĐÚC)" value={ct.ten_nhom} onChange={e => { const nc = [...chiTiet]; nc[idx].ten_nhom = e.target.value; setChiTiet(nc) }} style={{ fontWeight: 'bold' }} />
+                  </Col>
+                  <Col span={2}>
+                    <Button danger icon={<DeleteOutlined />} onClick={() => removeRow(idx)} />
+                  </Col>
+                </Row>
+              )
+            }
+            return (
+              <Row key={ct.key} gutter={8} align="middle" style={{ marginBottom: 6 }}>
+                <Col span={9}>
+                  <MaterialSelect placeholder="Chọn vật tư" style={{ width: '100%' }} value={ct.vat_tu_id} onChange={(v, vt) => handleVatTuChange(idx, v, vt)} />
+                </Col>
+                <Col span={4}>
+                  <InputNumber placeholder="SL" style={{ width: '100%' }} min={0} value={ct.so_luong_gui} onChange={v => handleSlChange(idx, v)} addonAfter={ct._vat_tu?.dvt_phu || 'SL'} />
+                </Col>
+                <Col span={4}>
+                  <InputNumber placeholder="Kg" style={{ width: '100%' }} min={0} value={ct.so_luong_gui_kg} onChange={v => { const nc = [...chiTiet]; nc[idx].so_luong_gui_kg = v; setChiTiet(nc) }} addonAfter="Kg" />
+                </Col>
+                <Col span={5}>
+                  <Input placeholder="Ghi chú" value={ct.ghi_chu} onChange={e => { const nc = [...chiTiet]; nc[idx].ghi_chu = e.target.value; setChiTiet(nc) }} />
+                </Col>
+                <Col span={2}>
+                  <Button danger icon={<DeleteOutlined />} onClick={() => removeRow(idx)} />
+                </Col>
+              </Row>
+            )
+          })}
+          <Space style={{ marginTop: 8 }}>
+            <Button type="dashed" icon={<PlusOutlined />} onClick={addRow}>Thêm dòng</Button>
+            <Button type="dashed" onClick={addGroup}>Thêm dòng nhóm</Button>
+            <Upload showUploadList={false} customRequest={handleImportExcel} accept=".xlsx, .xls">
+              <Button icon={<UploadOutlined />} type="default">Nhập từ Excel</Button>
+            </Upload>
+          </Space>
           <Form.Item name="ghi_chu" label="Ghi chú chung" style={{ marginTop: 12 }}><Input.TextArea rows={2} /></Form.Item>
         </Form>
       </Modal>
@@ -406,7 +486,7 @@ export default function LenhDieuChuyen() {
             </Row>
             
             <Table
-              dataSource={tinhHinhData.chi_tiet}
+              dataSource={tinhHinhData.chi_tiet.filter(c => c.vat_tu_id)}
               rowKey="vat_tu_id" size="small" pagination={false}
               bordered
               columns={[
